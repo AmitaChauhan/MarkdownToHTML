@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>markdown to html</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <link href='https://fonts.googleapis.com/css?family=Fjalla+One|Roboto' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <div class="container" style="font-family: 'Roboto', sans-serif; text-align:center" >
+            <h1>Markdown To HTML</h1>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Example row of columns -->
+
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <form name="test">
+                <textarea  type="text" style="border: 1px solid grey; width:80%; margin-top:40px; height: 150px" id="inp">Markdown</textarea>
+            </form>
+            <form name="test">
+                <div type="text" style="border: 1px solid grey; width: 80%; margin-top:40px; height: 150px" id="copyData">HTML Format</div>
+            </form>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/6.0.1/markdown-it.min.js"></script>
+    <script type="text/javascript">
+    var inputElem = document.getElementById("inp");
+    function foo(ev) {
+        var tmp= markdownit();
+        var result=tmp.render(inputElem.value);
+        document.getElementById('copyData').innerHTML = result;
+    }
+    inputElem.addEventListener('change', foo);
+    inputElem.addEventListener('keyup', foo);
+    inputElem.addEventListener('mouseup', foo);
+    </script>
+</body>
+</html>
