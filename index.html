@@ -27,27 +27,50 @@
         </div>
         <div class="col-md-6">
             <form name="test">
-                <textarea  type="text" style="border: 1px solid grey; width:80%; margin-top:40px; height: 150px" id="inp">Markdown</textarea>
+                <textarea  type="text" style="border: 1px solid grey; width:80%; margin-top:10px; height: 150px" id="inp">Markdown</textarea>
             </form>
             <form name="test">
-                <div type="text" style="border: 1px solid grey; width: 80%; margin-top:40px; height: 150px" id="copyData">HTML Format</div>
+                <div type="text" style="border: 1px solid grey; width: 80%; margin-top:40px; height: 150px" id="copyData"> Rendered HTML </div>
             </form>
+            <!-- <form name="test">
+                <textarea type="text" style="border: 1px solid grey; width: 80%; margin-top:40px; height: 150px" id="copyDataRaw"> Raw HTML </textarea>
+            </form> -->
+            <div class="col-md-3">
+            </div>
+            <!-- <p><a class="btn btn-primary btn" id="btn" style="margin-top:20px" href="#" role="button"> Raw HTML </a></p> -->
+            <div class="col-md-1">
+            </div>
         </div>
-        <div class="col-md-3">
-        </div>
+        <div class="col-md-3"
     </div>
+</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/6.0.1/markdown-it.min.js"></script>
-    <script type="text/javascript">
-    var inputElem = document.getElementById("inp");
-    function foo(ev) {
-        var tmp= markdownit();
-        var result=tmp.render(inputElem.value);
-        document.getElementById('copyData').innerHTML = result;
-    }
-    inputElem.addEventListener('change', foo);
-    inputElem.addEventListener('keyup', foo);
-    inputElem.addEventListener('mouseup', foo);
-    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/6.0.1/markdown-it.min.js"></script>
+<script type="text/javascript">
+var inputElem = document.getElementById("inp");
+var button = document.getElementById("btn");
+function foo(ev) {
+    var tmp= markdownit();
+    var result=tmp.render(inputElem.value);
+    document.getElementById('copyData').innerHTML = result;
+    document.getElementById('copyDataRaw').innerHTML = result;
+}
+
+
+inputElem.addEventListener('change', foo);
+inputElem.addEventListener('keyup', foo);
+inputElem.addEventListener('mouseup', foo);
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-76705415-2', 'auto');
+ga('send', 'pageview');
+
+
+
+</script>
 </body>
 </html>
