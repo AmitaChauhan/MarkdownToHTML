@@ -8,7 +8,7 @@
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Fjalla+One|Roboto' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -21,57 +21,96 @@
             <h1>Markdown To HTML</h1>
         </div>
     </div>
-    <div class="container">
+
+    <div class="container centered">
         <!-- Example row of columns -->
-
-        <div class="col-md-3">
+        <div class="row">
+            <textarea  type="text" id="inp" class="col-md-6 col-md-offset-3" placeholder= "Markdown"></textarea>
         </div>
-        <div class="col-md-6">
-            <form name="test">
-                <textarea  type="text" style="border: 1px solid grey; width:80%; margin-top:10px; height: 150px" id="inp">Markdown</textarea>
-            </form>
-            <form name="test">
-                <div type="text" style="border: 1px solid grey; width: 80%; margin-top:40px; height: 150px" id="copyData"> Rendered HTML </div>
-            </form>
-            <form name="test">
-                <textarea type="text" style="border: 1px solid grey; width: 80%; margin-top:40px; height: 150px" id="copyDataRaw"> Raw HTML </textarea>
-            </form>
-            <div class="col-md-3">
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" id="copyData" readonly="true">Rendered HTML</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" id="copyDataRaw" style="display: none" readonly="true">Raw HTML</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+            <!-- <p><a class="btn btn-clipboard" id="btn-raw-html" style="margin-top:20px" href="#" role="button"> Copy </a></p> -->
+                <span><a class="btn btn-primary btn-block" id="btn-raw-html" href="#" role="button">   Raw HTML   </a></span>
+                <span><a class="btn btn-primary btn-block" id="btn-rendered-html" style="display: none" href="#" role="button"> Rendered HTML </a></span>
             </div>
-            <p><a class="btn btn-primary btn" id="btn" style="margin-top:20px" href="#" role="button"> Raw HTML </a></p>
-            <div class="col-md-2">
-            </div>
         </div>
-        <div class="col-md-3">
-        </div>
-</div>
+    </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/6.0.1/markdown-it.min.js"></script>
-<script type="text/javascript">
-var inputElem = document.getElementById("inp");
-var button = document.getElementById("btn");
-function foo(ev) {
-    var tmp= markdownit();
-    var result=tmp.render(inputElem.value);
-    document.getElementById('copyData').innerHTML = result;
-    document.getElementById('copyDataRaw').innerHTML = result;
-}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/6.0.1/markdown-it.min.js"></script>
+    <script type="text/javascript">
+    var inputElem = document.getElementById("inp");
+    var button = document.getElementById("btn");
+    function foo(ev) {
+        var tmp= markdownit();
+        var result=tmp.render(inputElem.value);
+        document.getElementById('copyData').innerHTML = result;
+        document.getElementById('copyDataRaw').innerHTML = result;
+    }
 
 
-inputElem.addEventListener('change', foo);
-inputElem.addEventListener('keyup', foo);
-inputElem.addEventListener('mouseup', foo);
+    inputElem.addEventListener('change', foo);
+    inputElem.addEventListener('keyup', foo);
+    inputElem.addEventListener('mouseup', foo);
 
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    //     document.addEventListener('copy', function(e){
+    //     e.clipboardData.setData('text/plain', 'Hello, world!');
+    //     e.clipboardData.setData('text/html', '<b>Hello, world!</b>');
+    //     e.preventDefault();
+    // });
 
-ga('create', 'UA-76705415-2', 'auto');
-ga('send', 'pageview');
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-76705415-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    <script>
+
+    var $hideData = function () {
+        $("#copyData")
+        .css ("display","none");
+        $("#btn-raw-html")
+        .css ("display","none");
+        $("#copyDataRaw")
+        .css ("display","");
+        $("#btn-rendered-html")
+        .css ("display","");
+    }
+
+    // $hideData();
+
+    $("#btn-raw-html").on("click", $hideData );
+
+    $("#btn-rendered-html").on("click", function (event) {
+        $("#copyData")
+        .css ("display","");
+        $("#btn-raw-html")
+        .css ("display","");
+        $("#copyDataRaw")
+        .css ("display","none");
+        $("#btn-rendered-html")
+        .css ("display","none");
+    });
+
+    // $('#btn-copy').on("click", function (event) {
+    //     $('#copyDataRaw')
+    //     .data()
+    // })
+
+    </script>
 
 
-
-</script>
 </body>
 </html>

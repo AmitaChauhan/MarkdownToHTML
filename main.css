@@ -1,8 +1,28 @@
-
-
-
 .text {
     font-family: 'Roboto', sans-serif;
     font-size: 700rem;
+}
 
+#inp {
+    border: 1px solid grey;
+    height: 150px;
+    width: 50%;
+}
+
+#copyData {
+    border: 1px solid grey;
+    height: 150px;
+    width: 50%;
+}
+
+
+#copyDataRaw {
+    border: 1px solid grey;
+    height: 150px;
+    padding: 0;
+    width: 50%;
+}
+
+.row + .row {
+    margin-top: 5px;
 }
